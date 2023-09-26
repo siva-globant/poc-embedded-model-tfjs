@@ -17,6 +17,9 @@ import {
   type SentryTransactionObject,
 } from "./context";
 import { getMetrics, msToTime } from "./helper";
+
+const cocoSSDModelURL = import.meta.env.BASE_URL + "/coco-ssd-model/model.json";
+
 interface IObjectDetectionModelInfo<T> {
   model?: T;
   loading?: boolean;
@@ -65,7 +68,7 @@ function CocoSSD() {
     startSpan(SentrySpan.MODEL_LOADING, null);
     const load_start_at = new Date().getTime();
     const model = await cocoSSD.load({
-      modelUrl: "/coco-ssd-model/model.json",
+      modelUrl: cocoSSDModelURL,
     });
     const load_end_at = new Date().getTime();
     finishSpan(SentrySpan.MODEL_LOADING);

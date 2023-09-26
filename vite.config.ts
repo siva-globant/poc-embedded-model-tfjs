@@ -5,5 +5,5 @@ import removeConsole from "vite-plugin-remove-console";
 export default defineConfig({
   plugins: [react(), removeConsole()],
   assetsInclude: ["**/*.pb"],
-  base: "/poc-embedded-model-tfjs/",
+  base: "/poc-embedded-model-tfjs",
 });

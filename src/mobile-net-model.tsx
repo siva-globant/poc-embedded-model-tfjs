@@ -4,7 +4,6 @@ import "@tensorflow/tfjs-backend-webgl";
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import type { MobileNet } from "@tensorflow-models/mobilenet";
 
-// import type { ObjectDetection } from "@tensorflow-models/coco-ssd";
 import Camera from "./camera";
 import "./App.css";
 import {
@@ -15,6 +14,9 @@ import {
   type SentryTransactionObject,
 } from "./context";
 import { getMetrics, msToTime } from "./helper";
+
+const mobileNetModelURL =
+  import.meta.env.BASE_URL + "/mobilenet-model/model.json";
 interface IObjectDetectionModelInfo<T> {
   model?: T;
   loading?: boolean;
@@ -62,7 +64,7 @@ function MobileNetModel() {
     startSpan(SentrySpan.MODEL_LOADING, null);
     const load_start_at = new Date().getTime();
     const model = await mobilenet.load({
-      modelUrl: "/mobilenet-model/model.json",
+      modelUrl: mobileNetModelURL,
       version: 2,
       alpha: 1,
     });
